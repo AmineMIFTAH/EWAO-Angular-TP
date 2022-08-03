@@ -1,0 +1,21 @@
+<h1 class="mb-5 text-center">Date : {{myDate | date:'medium'}}</h1>
+
+<table datatable [dtOptions]="dtOptions" class="table row-border">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Amount</th>
+        <th>Balance</th>
+        <th>Label</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let objTransaction of listTransaction">
+        <th><a routerLink="/transaction/{{objTransaction.id}}">{{objTransaction.id}}</a></th>
+        <td>{{objTransaction.amount}}</td>
+        <td>{{objTransaction.balance}}</td>
+        <td>{{objTransaction.label}}</td>
+      </tr>
+
+    </tbody>
+  </table>

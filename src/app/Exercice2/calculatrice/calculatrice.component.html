@@ -1,0 +1,44 @@
+<h1 class="ms-5 text-center text-danger">Calculatrice</h1>
+
+<input type="text" [(ngModel)]="valeur1" class="form-controler" name="valeur1">
+<select class="ms-3" name="font-family"  [(ngModel)]="operation">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">* </option>
+    <option value="/">/</option>
+
+  </select>
+<input  type="text" [(ngModel)]="valeur2" class="form-controler ms-3" name="valeur2">
+
+
+<button class="ms-3" (click)="setDisplay()">Calculer</button>
+
+<div *ngIf="display">Result : {{result}}</div>
+
+
+
+<div [ngStyle]="{
+  'margin-top':20 + 'px'
+}">
+  Zone d'affichage du résultat de la dernière opération :
+</div>
+
+<div *ngIf="listHis.length >= 2">
+  {{listHis[listHis.length-2].valeur1}} {{listHis[listHis.length-2].operation}} {{listHis[listHis.length-2].valeur2}} = {{listHis[listHis.length-2].result}} | {{listHis[listHis.length-2].date | date:'shortTime'}}
+</div>
+
+
+<div 
+  [ngStyle]="{
+    'margin-top':20 + 'px'
+  }"
+  >Zone historique :</div>
+
+<div >
+<ul *ngIf="listHis">
+  <li *ngFor="let objHis of listHis">
+    {{objHis.valeur1}} {{objHis.operation}} {{objHis.valeur2}} = {{objHis.result}} | {{objHis.date | date:'shortTime'}}
+    <button (click)="onRemove(objHis)">Remove</button>
+  </li>
+</ul>
+</div>

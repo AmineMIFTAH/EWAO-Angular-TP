@@ -1,0 +1,15 @@
+<h1 class="mb-5 text-center">Date : {{myDate | date:'medium'}}</h1>
+
+
+<h3>Detail de transaction :</h3>
+
+<div *ngIf="transaction">
+
+<div><strong>Id : </strong>{{transaction.id}}</div>
+<div><strong>Amount : </strong>{{transaction.amount}}</div>
+<div><strong>Balance : </strong>{{transaction.balance}}</div>
+<div><strong>Label : </strong>{{transaction.label}}</div>
+<div><strong>Description : </strong>{{transaction.description}}</div>
+<div><strong>Date : </strong>{{transaction.date}}</div>
+
+</div>

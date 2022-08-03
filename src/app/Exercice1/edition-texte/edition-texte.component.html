@@ -1,0 +1,44 @@
+<h1 class="mb-5 text-center text-danger">Edition de texte</h1>
+
+
+<form>
+  <div>Entrez votre nom</div>
+  <input class="mb-3" type="text" [(ngModel)]="nom" name="nom" placeholder="Entrez votre nom !" />
+
+  <div>Choisir font</div>
+  <select class="mb-3" name="font-family" [(ngModel)]="family">
+    <option value="Helvetica">Helvetica</option>
+    <option value="Times">Times</option>
+    <option value="Arial">Arial</option>
+    <option value="Arial Black">Arial Black</option>
+    <option value="Comic Sans MS">Comic Sans MS</option>
+    <option value="Courier New">Courier New</option>
+    <option value="Georgia ">Georgia</option>
+    <option value="Impact ">Impact</option>
+  </select>
+
+  <div>Choisir la taille</div>
+  <input class="mb-3" type="number" max="40" min="8" #inputSize (change)="getSize(inputSize.value)"
+    (keyup)="getSize(inputSize.value)" />
+
+  <div>Choisir alignement</div>
+
+  <p class="mb-3">
+    <input type="radio" value="left" name="align" (change)="alignf($event)" />
+    Gauche
+    <input type="radio" value="center" name="align" (change)="alignf($event)" />
+    Centre
+    <input type="radio" value="right" name="align" (change)="alignf($event)" />
+    Droite
+  </p>
+
+  <div>
+    <p [ngStyle]="{
+        'text-align': align,
+        'font-family': family,
+        'font-size': size + 'px'
+      }">
+      Bonjour {{ nom | uppercase }} !
+    </p>
+  </div>
+</form>
