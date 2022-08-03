@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-
-
 
 @Component({
   selector: 'transaction',
@@ -13,17 +10,35 @@ export class TransactionComponent implements OnInit {
   listTransaction:any;
   myDate:any;
 
-  constructor(private _httpClient: HttpClient) {}
-
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
+
+  constructor(private _httpClient: HttpClient) {}
 
   ngOnInit(): void {
 
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
 
-    this._httpClient.get('./assets/data/transactions.json').subscribe((response) => {
-      this.listTransaction = response;
-    });
+    var listLocal = localStorage.getItem("listLocal");
+    if(listLocal == null)
+    {
+      this._httpClient.get('./assets/data/transactions.json')
+      .subscribe(response => {
+        this.listTransaction = response;
+        localStorage.setItem("listLocal", JSON.stringify(response));
+      });
+    }else{
+      this.listTransaction = JSON.parse(listLocal);
+    }
+
+    // this._httpClient.get('./assets/data/transactions.json')
+    //   .subscribe(response => {
+    //     this.listTransaction = response;
+    //   });
+
+    
     
 
     setInterval(() => {         
@@ -31,14 +46,10 @@ export class TransactionComponent implements OnInit {
     }, 1000);
 
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
+
 
     
   }
-
 
 
 }
