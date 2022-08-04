@@ -31,6 +31,7 @@ export class TransactionComponent implements OnInit {
       });
     }else{
       this.listTransaction = JSON.parse(listLocal);
+      console.log('sla3');
     }
 
     // this._httpClient.get('./assets/data/transactions.json')
